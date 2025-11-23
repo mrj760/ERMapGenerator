@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net7.0-windows7.0": {
+    "net9.0-windows7.0": {
       "Magick.NET-Q16-AnyCPU/13.1.3": {
         "type": "package",
         "dependencies": {
@@ -67,6 +67,92 @@
             "related": ".xml"
           }
         }
+      },
+      "MetroFramework/1.2.0.3": {
+        "type": "package",
+        "dependencies": {
+          "MetroFramework.Design": "1.2.0.3",
+          "MetroFramework.Fonts": "1.2.0.3",
+          "MetroFramework.RunTime": "1.2.0.3"
+        }
+      },
+      "MetroFramework.Design/1.2.0.3": {
+        "type": "package",
+        "dependencies": {
+          "MetroFramework.RunTime": "1.2.0.3"
+        },
+        "compile": {
+          "lib/net40/MetroFramework.Design.dll": {}
+        },
+        "runtime": {
+          "lib/net40/MetroFramework.Design.dll": {}
+        }
+      },
+      "MetroFramework.Fonts/1.2.0.3": {
+        "type": "package",
+        "dependencies": {
+          "MetroFramework.RunTime": "1.2.0.3"
+        },
+        "compile": {
+          "lib/net40/MetroFramework.Fonts.dll": {}
+        },
+        "runtime": {
+          "lib/net40/MetroFramework.Fonts.dll": {}
+        }
+      },
+      "MetroFramework.RunTime/1.2.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net40-Client/MetroFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net40-Client/MetroFramework.dll": {}
+        }
+      },
+      "Microsoft.VisualStudio.Designer.Interfaces/17.14.40260": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.VisualStudio.Interop": "17.14.40260"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.VisualStudio.Designer.Interfaces.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.VisualStudio.Designer.Interfaces.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime/17.14.40254": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.VisualStudio.Interop/17.14.40260": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime": "17.14.40254"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.VisualStudio.Interop.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.VisualStudio.Interop.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
@@ -118,39 +204,164 @@
         "magick.net.core.13.1.3.nupkg.sha512",
         "magick.net.core.nuspec"
       ]
+    },
+    "MetroFramework/1.2.0.3": {
+      "sha512": "PldREwx2yJ9GFXoR4IsXgsrTuOOEL1c5qZYeIfv9SVCSd7cJobmNRDHo+2v78E6U1lIWHM+ZIceZEETdOj0+oA==",
+      "type": "package",
+      "path": "metroframework/1.2.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/MetroFramework.txt",
+        "README.TXT",
+        "metroframework.1.2.0.3.nupkg.sha512",
+        "metroframework.nuspec"
+      ]
+    },
+    "MetroFramework.Design/1.2.0.3": {
+      "sha512": "JhXzz2m1ofJu+vcqxib1s9nmI1akoDHTRweNISsVcvk38bVabqHpwrTpwvz3z4lcwqIe19/B6M4Rrk5uXdNmhA==",
+      "type": "package",
+      "path": "metroframework.design/1.2.0.3",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.TXT",
+        "Tools/install.ps1",
+        "lib/net40/MetroFramework.Design.dll",
+        "metroframework.design.1.2.0.3.nupkg.sha512",
+        "metroframework.design.nuspec"
+      ]
+    },
+    "MetroFramework.Fonts/1.2.0.3": {
+      "sha512": "5PAtJsIKfg4bzXPH3MeS4UFDxc4bgCe9yEEg+HS9+lOuwdChpMtawFw0XK4/u7OZxnCfkcHbnjTpu4IUpBBsfA==",
+      "type": "package",
+      "path": "metroframework.fonts/1.2.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.TXT",
+        "lib/net40/MetroFramework.Fonts.dll",
+        "metroframework.fonts.1.2.0.3.nupkg.sha512",
+        "metroframework.fonts.nuspec"
+      ]
+    },
+    "MetroFramework.RunTime/1.2.0.3": {
+      "sha512": "7AFviJ+uFd/jApvUzOU8mMzl3NCj/sjIKQgCeJqqEEc78R6LoOTH+qGFZBRIEV+6nqgt9h2Y/ei6xVkTNZ3sJA==",
+      "type": "package",
+      "path": "metroframework.runtime/1.2.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.TXT",
+        "lib/net40-Client/MetroFramework.dll",
+        "metroframework.runtime.1.2.0.3.nupkg.sha512",
+        "metroframework.runtime.nuspec"
+      ]
+    },
+    "Microsoft.VisualStudio.Designer.Interfaces/17.14.40260": {
+      "sha512": "/VUDwCtJVHcXW533Nz8DfH5/2dgfL30pbJaEF7i7zY9h9wHKtzVhRmdRIYz73rjKHTcDN72cGFZwrdODvTlAHQ==",
+      "type": "package",
+      "path": "microsoft.visualstudio.designer.interfaces/17.14.40260",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "PackageIcon.png",
+        "lib/net20/Microsoft.VisualStudio.Designer.Interfaces.dll",
+        "lib/net20/Microsoft.VisualStudio.Designer.Interfaces.xml",
+        "lib/net45/Microsoft.VisualStudio.Designer.Interfaces.dll",
+        "lib/net45/Microsoft.VisualStudio.Designer.Interfaces.xml",
+        "lib/net472/Microsoft.VisualStudio.Designer.Interfaces.dll",
+        "lib/net472/Microsoft.VisualStudio.Designer.Interfaces.xml",
+        "lib/net8.0/Microsoft.VisualStudio.Designer.Interfaces.dll",
+        "lib/net8.0/Microsoft.VisualStudio.Designer.Interfaces.xml",
+        "lib/netstandard2.0/Microsoft.VisualStudio.Designer.Interfaces.dll",
+        "lib/netstandard2.0/Microsoft.VisualStudio.Designer.Interfaces.xml",
+        "microsoft.visualstudio.designer.interfaces.17.14.40260.nupkg.sha512",
+        "microsoft.visualstudio.designer.interfaces.nuspec"
+      ]
+    },
+    "Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime/17.14.40254": {
+      "sha512": "ZwQ7yWYcDLjJbbtOjrbqbxRMCQGDzhm2hkqb+vpxidYjGlMS/5kBT1j5HE7hsZGTm66RtqsK5wz8/1/NYt+wnA==",
+      "type": "package",
+      "path": "microsoft.visualstudio.imaging.interop.14.0.designtime/17.14.40254",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "PackageIcon.png",
+        "lib/net20/Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.dll",
+        "lib/net20/Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.xml",
+        "lib/net472/Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.dll",
+        "lib/net472/Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.xml",
+        "lib/netstandard2.0/Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.dll",
+        "lib/netstandard2.0/Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime.xml",
+        "microsoft.visualstudio.imaging.interop.14.0.designtime.17.14.40254.nupkg.sha512",
+        "microsoft.visualstudio.imaging.interop.14.0.designtime.nuspec"
+      ]
+    },
+    "Microsoft.VisualStudio.Interop/17.14.40260": {
+      "sha512": "3jG1PSm3mq6SgkT1sKXnukeQxzmm31VEZH+b7EIfyyKOx01fMsr5Iq/sXwW9+4TxDe1sKjbWIJbI5QAkAOCatA==",
+      "type": "package",
+      "path": "microsoft.visualstudio.interop/17.14.40260",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "PackageIcon.png",
+        "lib/net20/Microsoft.VisualStudio.Interop.dll",
+        "lib/net20/Microsoft.VisualStudio.Interop.xml",
+        "lib/net472/Microsoft.VisualStudio.Interop.dll",
+        "lib/net472/Microsoft.VisualStudio.Interop.xml",
+        "lib/net8.0/Microsoft.VisualStudio.Interop.dll",
+        "lib/net8.0/Microsoft.VisualStudio.Interop.xml",
+        "lib/netstandard2.0/Microsoft.VisualStudio.Interop.dll",
+        "lib/netstandard2.0/Microsoft.VisualStudio.Interop.xml",
+        "microsoft.visualstudio.interop.17.14.40260.nupkg.sha512",
+        "microsoft.visualstudio.interop.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
-    "net7.0-windows7.0": [
-      "Magick.NET-Q16-AnyCPU >= 13.1.3"
+    "net9.0-windows7.0": [
+      "Magick.NET-Q16-AnyCPU >= 13.1.3",
+      "MetroFramework >= 1.2.0.3",
+      "MetroFramework.Design >= 1.2.0.3",
+      "Microsoft.VisualStudio.Designer.Interfaces >= 17.14.40260"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Isaac Fisher\\.nuget\\packages\\": {}
+    "C:\\Users\\TakeA\\.nuget\\packages\\": {},
+    "E:\\Program Files\\Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Isaac Fisher\\Downloads\\Syncthing Shared\\Game Mods & Tools\\Tools\\FromSoftware\\Repositories\\Active\\ERMapGenerator\\ERMapGenerator.csproj",
+      "projectUniqueName": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
       "projectName": "ERMapGenerator",
-      "projectPath": "C:\\Users\\Isaac Fisher\\Downloads\\Syncthing Shared\\Game Mods & Tools\\Tools\\FromSoftware\\Repositories\\Active\\ERMapGenerator\\ERMapGenerator.csproj",
-      "packagesPath": "C:\\Users\\Isaac Fisher\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Isaac Fisher\\Downloads\\Syncthing Shared\\Game Mods & Tools\\Tools\\FromSoftware\\Repositories\\Active\\ERMapGenerator\\obj\\",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "packagesPath": "C:\\Users\\TakeA\\.nuget\\packages\\",
+      "outputPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "E:\\Program Files\\Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Isaac Fisher\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\TakeA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net7.0-windows"
+        "net9.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net7.0-windows7.0": {
-          "targetAlias": "net7.0-windows",
+        "net9.0-windows7.0": {
+          "targetAlias": "net9.0-windows",
           "projectReferences": {}
         }
       },
@@ -158,15 +369,33 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
-      "net7.0-windows7.0": {
-        "targetAlias": "net7.0-windows",
+      "net9.0-windows7.0": {
+        "targetAlias": "net9.0-windows",
         "dependencies": {
           "Magick.NET-Q16-AnyCPU": {
             "target": "Package",
             "version": "[13.1.3, )"
+          },
+          "MetroFramework": {
+            "target": "Package",
+            "version": "[1.2.0.3, )"
+          },
+          "MetroFramework.Design": {
+            "target": "Package",
+            "version": "[1.2.0.3, )"
+          },
+          "Microsoft.VisualStudio.Designer.Interfaces": {
+            "target": "Package",
+            "version": "[17.14.40260, )"
           }
         },
         "imports": [
@@ -188,8 +417,170 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-6hgw-6x87-578x",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-9ccg-6pjw-x645",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-9pp9-cfwx-54rm",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1901",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known low severity vulnerability, https://github.com/advisories/GHSA-cfh4-9f7v-fhrc",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-cjc8-g9w8-chfw",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1901",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known low severity vulnerability, https://github.com/advisories/GHSA-fff3-4rp7-px97",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1901",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known low severity vulnerability, https://github.com/advisories/GHSA-fh55-q5pj-pxgw",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1901",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known low severity vulnerability, https://github.com/advisories/GHSA-hm4x-r5hc-794f",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-j7hp-h8jx-5ppr",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-mxvv-97wh-cfmm",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-qh3h-j545-h8c9",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-qp29-wxp5-wh82",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-vmhh-8rxq-fp9g",
+      "libraryId": "Magick.NET-Q16-AnyCPU",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MetroFramework.Design 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "MetroFramework.Design",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MetroFramework.Fonts 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "MetroFramework.Fonts",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MetroFramework.RunTime 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "MetroFramework.RunTime",
+      "targetGraphs": [
+        "net9.0-windows7.0"
+      ]
+    }
+  ]
 }

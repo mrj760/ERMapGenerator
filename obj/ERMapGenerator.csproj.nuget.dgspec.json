@@ -1,32 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Isaac Fisher\\Downloads\\Syncthing Shared\\Game Mods & Tools\\Tools\\FromSoftware\\Repositories\\Active\\ERMapGenerator\\ERMapGenerator.csproj": {}
+    "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Isaac Fisher\\Downloads\\Syncthing Shared\\Game Mods & Tools\\Tools\\FromSoftware\\Repositories\\Active\\ERMapGenerator\\ERMapGenerator.csproj": {
+    "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Isaac Fisher\\Downloads\\Syncthing Shared\\Game Mods & Tools\\Tools\\FromSoftware\\Repositories\\Active\\ERMapGenerator\\ERMapGenerator.csproj",
+        "projectUniqueName": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
         "projectName": "ERMapGenerator",
-        "projectPath": "C:\\Users\\Isaac Fisher\\Downloads\\Syncthing Shared\\Game Mods & Tools\\Tools\\FromSoftware\\Repositories\\Active\\ERMapGenerator\\ERMapGenerator.csproj",
-        "packagesPath": "C:\\Users\\Isaac Fisher\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Isaac Fisher\\Downloads\\Syncthing Shared\\Game Mods & Tools\\Tools\\FromSoftware\\Repositories\\Active\\ERMapGenerator\\obj\\",
+        "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+        "packagesPath": "C:\\Users\\TakeA\\.nuget\\packages\\",
+        "outputPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Program Files\\Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Isaac Fisher\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TakeA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0-windows"
+          "net9.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0-windows7.0": {
-            "targetAlias": "net7.0-windows",
+          "net9.0-windows7.0": {
+            "targetAlias": "net9.0-windows",
             "projectReferences": {}
           }
         },
@@ -34,15 +38,33 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net7.0-windows7.0": {
-          "targetAlias": "net7.0-windows",
+        "net9.0-windows7.0": {
+          "targetAlias": "net9.0-windows",
           "dependencies": {
             "Magick.NET-Q16-AnyCPU": {
               "target": "Package",
               "version": "[13.1.3, )"
+            },
+            "MetroFramework": {
+              "target": "Package",
+              "version": "[1.2.0.3, )"
+            },
+            "MetroFramework.Design": {
+              "target": "Package",
+              "version": "[1.2.0.3, )"
+            },
+            "Microsoft.VisualStudio.Designer.Interfaces": {
+              "target": "Package",
+              "version": "[17.14.40260, )"
             }
           },
           "imports": [
@@ -64,7 +86,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
