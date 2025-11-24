@@ -701,11 +701,9 @@ public partial class ERMapGenerator : MetroForm
 
     private void groundLevelComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        throw new System.NotImplementedException();
     }
 
     private void tabPage2_Click(object sender, EventArgs e)
     {
-        throw new System.NotImplementedException();
     }
 }
