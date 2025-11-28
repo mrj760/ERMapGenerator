@@ -213,6 +213,21 @@ public partial class ERMapGenerator : MetroForm
         }
     }
 
+    private async Task UnpackMaps()
+    {
+        List<string> groundLevels = GetGroundLevels();
+        List<string> zoomLevels = GetZoomLevels().Keys.ToList();
+        int groundLevelIndex = groundLevelComboBox.Invoke(() => groundLevelComboBox.SelectedIndex);
+        int zoomLevelIndex = zoomLevelComboBox.Invoke(() => zoomLevelComboBox.SelectedIndex);
+        groundLevels = GetFilteredGroundLevels(groundLevelIndex, groundLevels).ToList();
+        zoomLevels = GetFilteredZoomLevels(zoomLevelIndex, zoomLevels).ToList();
+        foreach (string groundLevel in groundLevels)
+        {
+            foreach (string zoomLevel in zoomLevels)
+                await UnpackStitchMap(groundLevel, zoomLevel);
+        }
+    }
+
     private async Task UnpackStitchMap(string groundLevel = "M00", string zoomLevel = "L0")
     {
         progressLabel.Invoke(new Action(() => progressLabel.Text = $@"Parsing texture files..."));
@@ -293,21 +308,6 @@ public partial class ERMapGenerator : MetroForm
             await WriteStitchedMap(grids[flag], outFileNames[flag]);
     }
 
-    private async Task UnpackMaps()
-    {
-        List<string> groundLevels = GetGroundLevels();
-        List<string> zoomLevels = GetZoomLevels().Keys.ToList();
-        int groundLevelIndex = groundLevelComboBox.Invoke(() => groundLevelComboBox.SelectedIndex);
-        int zoomLevelIndex = zoomLevelComboBox.Invoke(() => zoomLevelComboBox.SelectedIndex);
-        groundLevels = GetFilteredGroundLevels(groundLevelIndex, groundLevels).ToList();
-        zoomLevels = GetFilteredZoomLevels(zoomLevelIndex, zoomLevels).ToList();
-        foreach (string groundLevel in groundLevels)
-        {
-            foreach (string zoomLevel in zoomLevels)
-                await UnpackStitchMap(groundLevel, zoomLevel);
-        }
-    }
-
     private async Task RepackTileMap()
     {
         // TODO: Function
@@ -324,41 +324,6 @@ public partial class ERMapGenerator : MetroForm
         }
 
         mapTileBhd = new BXF4();
-    }
-
-    private IEnumerable<string> GetFilteredGroundLevels(int groundLevelIndex, IReadOnlyList<string> groundLevels)
-    {
-        return automationModeTabControl.Invoke(() => automationModeTabControl.SelectedIndex == 0)
-            ? groundLevelIndex == 0 ? groundLevels.Skip(1) : new[] { groundLevels[groundLevelIndex] }
-            : new[] { groundLevels[groundLevelIndex] };
-    }
-
-    private IEnumerable<string> GetFilteredZoomLevels(int zoomLevelIndex, IReadOnlyList<string> zoomLevels)
-    {
-        // TODO: Function
-        return automationModeTabControl.Invoke(() => automationModeTabControl.SelectedIndex == 0)
-            ? zoomLevelIndex == 0 ? zoomLevels.Skip(1) : new[] { zoomLevels[zoomLevelIndex] }
-            : new[] { zoomLevels[zoomLevelIndex] };
-    }
-
-    private void WriteTile(IDisposable tileImage, string tileName)
-    {
-        progressLabel.Invoke(() => progressLabel.Text = $@"Writing {tileName}...");
-        TPF.Texture texture = new();
-        byte[] bytes = (byte[])new ImageConverter().ConvertTo(tileImage, typeof(byte[]))!;
-        IMagickImage<ushort> image = MagickImage.FromBase64(Convert.ToBase64String(bytes));
-        texture.Bytes = ConvertMagickImageToDDS(image);
-        texture.Name = tileName;
-        texture.Format = 0x66;
-        TPF tpf = new() { Compression = DCX.Type.DCX_KRAK };
-        tpf.Textures.Add(texture);
-        byte[] tpfBytes = tpf.Write();
-        BinderFile file = new()
-        {
-            Name = $"71_MapTile\\{tileName}.tpf.dcx",
-            Bytes = tpfBytes
-        };
-        mapTileBhd.Files.Add(file);
     }
 
     private async Task ExportTiles(string groundLevel, string zoomLevel)
@@ -406,6 +371,41 @@ public partial class ERMapGenerator : MetroForm
         for (int i = 0; i < mapTileTpfBhd.Files.Count; i++)
             mapTileTpfBhd.Files[i].ID = i;
         mapTileTpfBhd.Write(mapTileTpfBhdPath, mapTileTpfBtdPath);
+    }
+
+    private IEnumerable<string> GetFilteredGroundLevels(int groundLevelIndex, IReadOnlyList<string> groundLevels)
+    {
+        return automationModeTabControl.Invoke(() => automationModeTabControl.SelectedIndex == 0)
+            ? groundLevelIndex == 0 ? groundLevels.Skip(1) : new[] { groundLevels[groundLevelIndex] }
+            : new[] { groundLevels[groundLevelIndex] };
+    }
+
+    private IEnumerable<string> GetFilteredZoomLevels(int zoomLevelIndex, IReadOnlyList<string> zoomLevels)
+    {
+        // TODO: Function
+        return automationModeTabControl.Invoke(() => automationModeTabControl.SelectedIndex == 0)
+            ? zoomLevelIndex == 0 ? zoomLevels.Skip(1) : new[] { zoomLevels[zoomLevelIndex] }
+            : new[] { zoomLevels[zoomLevelIndex] };
+    }
+
+    private void WriteTile(IDisposable tileImage, string tileName)
+    {
+        progressLabel.Invoke(() => progressLabel.Text = $@"Writing {tileName}...");
+        TPF.Texture texture = new();
+        byte[] bytes = (byte[])new ImageConverter().ConvertTo(tileImage, typeof(byte[]))!;
+        IMagickImage<ushort> image = MagickImage.FromBase64(Convert.ToBase64String(bytes));
+        texture.Bytes = ConvertMagickImageToDDS(image);
+        texture.Name = tileName;
+        texture.Format = 0x66;
+        TPF tpf = new() { Compression = DCX.Type.DCX_KRAK };
+        tpf.Textures.Add(texture);
+        byte[] tpfBytes = tpf.Write();
+        BinderFile file = new()
+        {
+            Name = $"71_MapTile\\{tileName}.tpf.dcx",
+            Bytes = tpfBytes
+        };
+        mapTileBhd.Files.Add(file);
     }
 
     private void ToggleAllControls(bool wantsEnabled)
