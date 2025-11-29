@@ -47,13 +47,13 @@
             outputFolderPathLabel = new System.Windows.Forms.Label();
             outputFolderButton = new System.Windows.Forms.Button();
             tabPage1 = new System.Windows.Forms.TabPage();
-            mapDisplayGroupBox = new System.Windows.Forms.GroupBox();
-            mapDisplayOpenMapImageLabel = new System.Windows.Forms.Label();
-            mapDisplayPictureBox = new System.Windows.Forms.PictureBox();
-            mapImageGroupBox = new System.Windows.Forms.GroupBox();
+            // mapDisplayGroupBox = new System.Windows.Forms.GroupBox();
+            // mapDisplayOpenMapImageLabel = new System.Windows.Forms.Label();
+            // mapDisplayPictureBox = new System.Windows.Forms.PictureBox();
+            InputFolderGroupBox = new System.Windows.Forms.GroupBox();
             label1 = new System.Windows.Forms.Label();
-            mapImageFilePathLabel = new System.Windows.Forms.Label();
-            browseMapImageButton = new System.Windows.Forms.Button();
+            inputFolderPathLabel = new System.Windows.Forms.Label();
+            BrowseInputFolderButton = new System.Windows.Forms.Button();
             gameModFolderGroupBox = new System.Windows.Forms.GroupBox();
             label5 = new System.Windows.Forms.Label();
             gameModFolderPathLabel = new System.Windows.Forms.Label();
@@ -63,9 +63,9 @@
             tabPage2.SuspendLayout();
             outputFolderGroupBox.SuspendLayout();
             tabPage1.SuspendLayout();
-            mapDisplayGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)mapDisplayPictureBox).BeginInit();
-            mapImageGroupBox.SuspendLayout();
+            // mapDisplayGroupBox.SuspendLayout();
+            // ((System.ComponentModel.ISupportInitialize)mapDisplayPictureBox).BeginInit();
+            InputFolderGroupBox.SuspendLayout();
             gameModFolderGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -190,7 +190,6 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Unpack/Stitch Map";
             tabPage2.UseVisualStyleBackColor = true;
-            tabPage2.Click += tabPage2_Click;
             // 
             // drawTileDebugInfoCheckBox
             // 
@@ -246,8 +245,8 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(mapDisplayGroupBox);
-            tabPage1.Controls.Add(mapImageGroupBox);
+            // tabPage1.Controls.Add(mapDisplayGroupBox);
+            tabPage1.Controls.Add(InputFolderGroupBox);
             tabPage1.Location = new System.Drawing.Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -258,50 +257,51 @@
             // 
             // mapDisplayGroupBox
             // 
-            mapDisplayGroupBox.Controls.Add(mapDisplayOpenMapImageLabel);
-            mapDisplayGroupBox.Controls.Add(mapDisplayPictureBox);
-            mapDisplayGroupBox.Location = new System.Drawing.Point(3, 81);
-            mapDisplayGroupBox.Name = "mapDisplayGroupBox";
-            mapDisplayGroupBox.Size = new System.Drawing.Size(541, 361);
-            mapDisplayGroupBox.TabIndex = 13;
-            mapDisplayGroupBox.TabStop = false;
-            mapDisplayGroupBox.Text = "Map Display";
+            // mapDisplayGroupBox.Controls.Add(mapDisplayOpenMapImageLabel);
+            // mapDisplayGroupBox.Controls.Add(mapDisplayPictureBox);
+            // mapDisplayGroupBox.Location = new System.Drawing.Point(3, 81);
+            // mapDisplayGroupBox.Name = "mapDisplayGroupBox";
+            // mapDisplayGroupBox.Size = new System.Drawing.Size(541, 361);
+            // mapDisplayGroupBox.TabIndex = 13;
+            // mapDisplayGroupBox.TabStop = false;
+            // mapDisplayGroupBox.Text = "Map Display";
             // 
             // mapDisplayOpenMapImageLabel
             // 
-            mapDisplayOpenMapImageLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            mapDisplayOpenMapImageLabel.Location = new System.Drawing.Point(3, 19);
-            mapDisplayOpenMapImageLabel.Name = "mapDisplayOpenMapImageLabel";
-            mapDisplayOpenMapImageLabel.Size = new System.Drawing.Size(535, 339);
-            mapDisplayOpenMapImageLabel.TabIndex = 3;
-            mapDisplayOpenMapImageLabel.Text = "Open a map image to view map data...";
-            mapDisplayOpenMapImageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // mapDisplayOpenMapImageLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            // mapDisplayOpenMapImageLabel.Location = new System.Drawing.Point(3, 19);
+            // mapDisplayOpenMapImageLabel.Name = "mapDisplayOpenMapImageLabel";
+            // mapDisplayOpenMapImageLabel.Size = new System.Drawing.Size(535, 339);
+            // mapDisplayOpenMapImageLabel.TabIndex = 3;
+            // mapDisplayOpenMapImageLabel.Text = "Open a map image to view map data...";
+            // mapDisplayOpenMapImageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mapDisplayPictureBox
             // 
-            mapDisplayPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
-            mapDisplayPictureBox.Location = new System.Drawing.Point(6, 19);
-            mapDisplayPictureBox.Name = "mapDisplayPictureBox";
-            mapDisplayPictureBox.Size = new System.Drawing.Size(529, 336);
-            mapDisplayPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            mapDisplayPictureBox.TabIndex = 12;
-            mapDisplayPictureBox.TabStop = false;
-            mapDisplayPictureBox.MouseDown += MapDisplayPictureBox_MouseDown;
-            mapDisplayPictureBox.MouseMove += MapDisplayPictureBox_MouseMove;
-            mapDisplayPictureBox.MouseUp += MapDisplayPictureBox_MouseUp;
+            // mapDisplayPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
+            // mapDisplayPictureBox.Location = new System.Drawing.Point(6, 19);
+            // mapDisplayPictureBox.Name = "mapDisplayPictureBox";
+            // mapDisplayPictureBox.Size = new System.Drawing.Size(529, 336);
+            // mapDisplayPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            // mapDisplayPictureBox.TabIndex = 12;
+            // mapDisplayPictureBox.TabStop = false;
+            // mapDisplayPictureBox.MouseDown += MapDisplayPictureBox_MouseDown;
+            // mapDisplayPictureBox.MouseMove += MapDisplayPictureBox_MouseMove;
+            // mapDisplayPictureBox.MouseUp += MapDisplayPictureBox_MouseUp;
             // 
             // mapImageGroupBox
             // 
-            mapImageGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
-            mapImageGroupBox.Controls.Add(label1);
-            mapImageGroupBox.Controls.Add(mapImageFilePathLabel);
-            mapImageGroupBox.Controls.Add(browseMapImageButton);
-            mapImageGroupBox.Location = new System.Drawing.Point(3, 3);
-            mapImageGroupBox.Name = "mapImageGroupBox";
-            mapImageGroupBox.Size = new System.Drawing.Size(541, 72);
-            mapImageGroupBox.TabIndex = 14;
-            mapImageGroupBox.TabStop = false;
-            mapImageGroupBox.Text = "Map Image";
+            InputFolderGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
+            InputFolderGroupBox.Controls.Add(label1);
+            InputFolderGroupBox.Controls.Add(inputFolderPathLabel);
+            InputFolderGroupBox.Controls.Add(BrowseInputFolderButton);
+            InputFolderGroupBox.Cursor = System.Windows.Forms.Cursors.Default;
+            InputFolderGroupBox.Location = new System.Drawing.Point(3, 3);
+            InputFolderGroupBox.Name = "InputFolderGroupBox";
+            InputFolderGroupBox.Size = new System.Drawing.Size(541, 72);
+            InputFolderGroupBox.TabIndex = 14;
+            InputFolderGroupBox.TabStop = false;
+            InputFolderGroupBox.Text = "Input Folder";
             // 
             // label1
             // 
@@ -314,23 +314,23 @@
             // 
             // mapImageFilePathLabel
             // 
-            mapImageFilePathLabel.AutoSize = true;
-            mapImageFilePathLabel.Location = new System.Drawing.Point(37, 49);
-            mapImageFilePathLabel.Name = "mapImageFilePathLabel";
-            mapImageFilePathLabel.Size = new System.Drawing.Size(29, 15);
-            mapImageFilePathLabel.TabIndex = 1;
-            mapImageFilePathLabel.Text = "N/A";
+            inputFolderPathLabel.AutoSize = true;
+            inputFolderPathLabel.Location = new System.Drawing.Point(37, 49);
+            inputFolderPathLabel.Name = "inputFolderPathLabel";
+            inputFolderPathLabel.Size = new System.Drawing.Size(29, 15);
+            inputFolderPathLabel.TabIndex = 1;
+            inputFolderPathLabel.Text = "N/A";
             // 
             // browseMapImageButton
             // 
-            browseMapImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
-            browseMapImageButton.Location = new System.Drawing.Point(6, 23);
-            browseMapImageButton.Name = "browseMapImageButton";
-            browseMapImageButton.Size = new System.Drawing.Size(529, 23);
-            browseMapImageButton.TabIndex = 0;
-            browseMapImageButton.Text = "Browse";
-            browseMapImageButton.UseVisualStyleBackColor = true;
-            browseMapImageButton.Click += BrowseMapImageButton_Click;
+            BrowseInputFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
+            BrowseInputFolderButton.Location = new System.Drawing.Point(6, 23);
+            BrowseInputFolderButton.Name = "BrowseInputFolderButton";
+            BrowseInputFolderButton.Size = new System.Drawing.Size(529, 23);
+            BrowseInputFolderButton.TabIndex = 0;
+            BrowseInputFolderButton.Text = "Browse";
+            BrowseInputFolderButton.UseVisualStyleBackColor = true;
+            BrowseInputFolderButton.Click += BrowseInputFolderButtonClick;
             // 
             // gameModFolderGroupBox
             // 
@@ -402,10 +402,10 @@
             outputFolderGroupBox.ResumeLayout(false);
             outputFolderGroupBox.PerformLayout();
             tabPage1.ResumeLayout(false);
-            mapDisplayGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)mapDisplayPictureBox).EndInit();
-            mapImageGroupBox.ResumeLayout(false);
-            mapImageGroupBox.PerformLayout();
+            // mapDisplayGroupBox.ResumeLayout(false);
+            // ((System.ComponentModel.ISupportInitialize)mapDisplayPictureBox).EndInit();
+            InputFolderGroupBox.ResumeLayout(false);
+            InputFolderGroupBox.PerformLayout();
             gameModFolderGroupBox.ResumeLayout(false);
             gameModFolderGroupBox.PerformLayout();
             ResumeLayout(false);
@@ -426,13 +426,13 @@
         private TabControl automationModeTabControl;
         private TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private GroupBox mapDisplayGroupBox;
-        private Label mapDisplayOpenMapImageLabel;
-        private PictureBox mapDisplayPictureBox;
-        private GroupBox mapImageGroupBox;
+        // private GroupBox mapDisplayGroupBox;
+        // private Label mapDisplayOpenMapImageLabel;
+        // private PictureBox mapDisplayPictureBox;
+        private System.Windows.Forms.GroupBox InputFolderGroupBox;
         private Label label1;
-        private Label mapImageFilePathLabel;
-        private Button browseMapImageButton;
+        private Label inputFolderPathLabel;
+        private Button BrowseInputFolderButton;
         private System.Windows.Forms.GroupBox gameModFolderGroupBox;
         private Label label5;
         private Label gameModFolderPathLabel;

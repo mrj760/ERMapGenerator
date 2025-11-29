@@ -12,25 +12,29 @@ namespace ERMapGenerator;
 public partial class ERMapGenerator : MetroForm
 {
     private const string version = "1.3";
-    private const float mapDisplayMaxZoomLevel = 2.0f;
-    private const float mapDisplayZoomIncrement = 0.1f;
+
+    // private const float mapDisplayMaxZoomLevel = 2.0f;
+    // private const float mapDisplayZoomIncrement = 0.1f;
     private static string gameModFolderPath = "";
     private static string mapTileMaskBndPath = "";
     private static string mapTileTpfBhdPath = "";
     private static string mapTileTpfBtdPath = "";
     private static string outputFolderPath = "";
+    private static string inputFolderPath = "";
     private static BND4 mapTileMaskBnd = new();
     private static BXF4 mapTileTpfBhd = new();
     private static Matrix Flags = new();
+
     private static XmlNode? MapTileMaskRoot;
-    private static bool isDraggingMapDisplay;
-    private static int mapDisplayXPos;
-    private static int mapDisplayYPos;
+
+    // private static bool isDraggingMapDisplay;
+    // private static int mapDisplayXPos;
+    // private static int mapDisplayYPos;
     private static BXF4 mapTileBhd = new();
-    private float mapDisplayMinZoomLevel = -1;
-    private float mapDisplayZoomLevel;
-    private string mapImageFilePath = "";
-    private Bitmap savedMapImage = null!;
+
+    // private float mapDisplayMinZoomLevel = -1;
+    // private float mapDisplayZoomLevel;
+    private Bitmap? savedMapImage = null!;
 
     private DarkModeCS dm;
 
@@ -48,12 +52,22 @@ public partial class ERMapGenerator : MetroForm
 
     private void RegisterFormEvents()
     {
-        mapDisplayPictureBox.MouseWheel += MapDisplayPictureBox_MouseWheel;
+        // mapDisplayPictureBox.MouseWheel += MapDisplayPictureBox_MouseWheel;
     }
 
     private void SetVersionString()
     {
         versionStr.Text += $@" {version}";
+    }
+
+    private void ERMapGenerator_Shown(object sender, EventArgs e)
+    {
+        // mapDisplayGroupBox.Enabled = false;
+        mapConfigurationGroupBox.Enabled = false;
+        outputFolderGroupBox.Enabled = false;
+        drawTileDebugInfoCheckBox.Enabled = false;
+        automateButton.Enabled = true;
+        InputFolderGroupBox.Enabled = false;
     }
 
     private static string[] GetAllFolderFiles(string folderPath, string fileType = "*.*")
@@ -102,7 +116,7 @@ public partial class ERMapGenerator : MetroForm
         mapTileMaskBnd = BND4.Read(mapTileMaskBndPath);
         mapTileTpfBhd = BXF4.Read(mapTileTpfBhdPath, mapTileTpfBtdPath);
         outputFolderGroupBox.Enabled = true;
-        mapImageGroupBox.Enabled = true;
+        InputFolderGroupBox.Enabled = true;
     }
 
     private void OutputFolderButton_Click(object sender, EventArgs e)
@@ -122,12 +136,47 @@ public partial class ERMapGenerator : MetroForm
         return new MagickImage(MagickColors.Black, tileSize * gridSizeX, tileSize * gridSizeY);
     }
 
-    private static void SetFlags(int zoomLevel)
+    // private static void SetFlags(int zoomLevel)
+    // {
+    //     Flags = new Matrix();
+    //     for (int i = 0; i < MapTileMaskRoot?.ChildNodes.Count; ++i)
+    //     {
+    //         XmlNode? node = MapTileMaskRoot.ChildNodes[i];
+    //         if (node == null)
+    //         {
+    //             ShowInformationDialog($@"Coordinate node {i} does not exist.");
+    //             continue;
+    //         }
+    //
+    //         if (node.Attributes == null || node.Attributes.Count < 2)
+    //         {
+    //             ShowInformationDialog($@"Coordinate node {i} does not contain any attribute information.");
+    //             continue;
+    //         }
+    //
+    //         string coord = $"{int.Parse(node.Attributes[1].Value):00000}";
+    //
+    //         bool isValid = zoomLevel switch
+    //         {
+    //             0 => coord.StartsWith("0"),
+    //             1 => coord.StartsWith("1"),
+    //             2 => coord.StartsWith("2"),
+    //             _ => false
+    //         };
+    //         if (!isValid) continue;
+    //         int x = int.Parse(coord.Substring(1, 2));
+    //         int y = int.Parse(coord.Substring(3, 2));
+    //         int mask = int.Parse(node.Attributes[2].Value);
+    //         Flags[-1, x, y] = mask;
+    //     }
+    // }
+
+    private static Set<int> CollectMasks()
     {
-        Flags = new Matrix();
+        var masks = new Set<int>();
         for (int i = 0; i < MapTileMaskRoot?.ChildNodes.Count; ++i)
         {
-            XmlNode? node = MapTileMaskRoot.ChildNodes[i];
+            var node = MapTileMaskRoot.ChildNodes[i];
             if (node == null)
             {
                 ShowInformationDialog($@"Coordinate node {i} does not exist.");
@@ -140,34 +189,22 @@ public partial class ERMapGenerator : MetroForm
                 continue;
             }
 
-            string coord = $"{int.Parse(node.Attributes[1].Value):00000}";
-            if (coord == "02831")
+            int mask = int.Parse(node.Attributes[2].Value);
+            if (!masks.Contains(mask))
             {
-                Console.WriteLine("");
+                masks.Add(mask);
             }
-
-            bool isValid = zoomLevel switch
-            {
-                0 => coord.StartsWith("0"),
-                1 => coord.StartsWith("1"),
-                2 => coord.StartsWith("2"),
-                _ => false
-            };
-            if (!isValid) continue;
-            int x = int.Parse(coord.Substring(1, 2));
-            int y = int.Parse(coord.Substring(3, 2));
-            Flags[-1, x, y] = int.Parse(node.Attributes[2].Value);
         }
+
+        return masks;
     }
 
-    // TODO: This is temporary...
-
-    private static void SetFlagsForExportTiles()
+    private static void SetFlagsForExportTiles(int mask)
     {
         Flags = new Matrix();
         for (int i = 0; i < MapTileMaskRoot?.ChildNodes.Count; ++i)
         {
-            XmlNode? node = MapTileMaskRoot.ChildNodes[i];
+            var node = MapTileMaskRoot.ChildNodes[i];
             if (node == null)
             {
                 ShowInformationDialog($@"Coordinate node {i} does not exist.");
@@ -184,32 +221,23 @@ public partial class ERMapGenerator : MetroForm
             int zoomLevel = int.Parse(coord[..1]);
             int x = int.Parse(coord.Substring(1, 2));
             int y = int.Parse(coord.Substring(3, 2));
-            Flags[zoomLevel, x, y] = int.Parse(node.Attributes[2].Value);
+            bool use = int.Parse(node.Attributes[2].Value) == mask;
+            Flags[zoomLevel, x, y] = use;
         }
     }
 
-    private async Task WriteStitchedMap(IMagickImage grid, string path)
-    {
-        string outputFileName = $"{path}.dds";
-        string outputFilePath = $"{outputFolderPath}\\{outputFileName}";
-        progressLabel.Invoke(new Action(() => progressLabel.Text = $@"Writing {outputFileName} to file..."));
-        await Task.Delay(1000);
-        await grid.WriteAsync(outputFilePath);
-    }
-
-    private async Task ReadMapTileMaskRoot(string groundLevel)
+    private void ReadMapTileMaskRoot(string groundLevel)
     {
         BinderFile? file = mapTileMaskBnd.Files.Find(i => i.Name.Contains(groundLevel));
         if (file != null)
         {
             string fileName = Path.GetFileName(file.Name);
             progressLabel.Invoke(new Action(() => progressLabel.Text = $@"Parsing map tile mask {fileName}..."));
-            await Task.Delay(1000);
             XmlDocument doc = new();
             doc.Load(new MemoryStream(file.Bytes));
             MapTileMaskRoot = doc.LastChild;
             if (MapTileMaskRoot == null) ShowInformationDialog($@"{fileName} contains no root XML node.");
-            else SetFlags(0);
+            // else SetFlags(0);
         }
     }
 
@@ -230,111 +258,106 @@ public partial class ERMapGenerator : MetroForm
 
     private async Task UnpackStitchMap(string groundLevel = "M00", string zoomLevel = "L0")
     {
-        progressLabel.Invoke(new Action(() => progressLabel.Text = $@"Parsing texture files..."));
+        await progressLabel.InvokeAsync(new Action(() => progressLabel.Text = $@"Parsing texture files..."));
         if (string.IsNullOrEmpty(outputFolderPath)) return;
-        bool zoomLevelReached = false;
-        await ReadMapTileMaskRoot(groundLevel);
         int gridSizeX = GetZoomLevels().GetValueOrDefault(zoomLevel);
         const int tileSize = 256;
 
-        var flags = new List<int>();
-        var grids = new Dictionary<int, MagickImage>();
-        var outFileNames = new Dictionary<int, string>();
-
-        await ReadMapTileMaskRoot(groundLevel);
-        SetFlagsForExportTiles();
-
-        for (int i = 0; i < mapTileTpfBhd.Files.Count; i++)
+        ReadMapTileMaskRoot(groundLevel);
+        foreach (int mask in CollectMasks())
         {
-            BinderFile tpfFile = mapTileTpfBhd.Files[i];
-            TPF.Texture texFile = TPF.Read(tpfFile.Bytes).Textures[0];
-            string[] tokens = texFile.Name.Split('_');
-            if (tokens[0].ToLower() != "menu" || tokens[1].ToLower() != "maptile") continue;
-
-            string groundLevelToken = tokens[2];
-            string zoomLevelToken = tokens[3];
-            int x = int.Parse(tokens[4]);
-            int y = int.Parse(tokens[5]);
-            int flag = int.Parse(tokens[6], NumberStyles.HexNumber);
-
-            if (zoomLevelReached && zoomLevelToken != zoomLevel) break;
-            if (groundLevelToken != groundLevel || zoomLevelToken != zoomLevel) continue;
-            zoomLevelReached = true;
-
-            if (flag == Flags[int.Parse(zoomLevel[1..]), x, y]) flag = -1;
-            MagickImage? grid = grids!.GetValueOrDefault(flag, null);
-            if (grid == null)
+            bool zoomLevelReached = false;
+            var grid = CreateMapGrid(gridSizeX, gridSizeX, tileSize);
+            string? outFileName = null;
+            foreach (var tpfFile in mapTileTpfBhd.Files /* Sorted alphabetically already */)
             {
-                flags.Add(flag);
-                outFileNames[flag] = string.Join("_", tokens[0], tokens[1], groundLevelToken, zoomLevelToken, "" + flag);
-                grids[flag] = grid = CreateMapGrid(gridSizeX, gridSizeX, tileSize);
-            }
+                var texFile = TPF.Read(tpfFile.Bytes).Textures[0];
+                string[] tokens = texFile.Name.Split('_');
 
-            progressLabel.Invoke(new Action(() => progressLabel.Text = $@"Stitching texture file {texFile.Name}..."));
+                if (mask != int.Parse(tokens[6], NumberStyles.HexNumber) ||
+                    !tokens[0].ToLower().Equals("menu") ||
+                    !tokens[1].ToLower().Equals("maptile")) continue;
 
-            MagickImage tile = new(texFile.Bytes);
-            tile.Resize(tileSize, tileSize);
-            if (drawTileDebugInfoCheckBox.Checked)
-            {
-                tile.BorderColor = MagickColors.Black;
-                tile.Border(5);
-            }
+                string groundLevelToken = tokens[2];
+                string zoomLevelToken = tokens[3];
 
-            int adjustedX = x * tileSize;
-            int adjustedY = grid.Height - y * tileSize - tileSize;
-            grid.Draw(new Drawables().Composite(adjustedX, adjustedY, tile));
-            if (drawTileDebugInfoCheckBox.Checked)
-            {
-                MagickReadSettings textSettings = new()
+                /* Since sorted alphabetically, this indicates further iterations are irrelevant */
+                if (zoomLevelReached && zoomLevelToken != zoomLevel) break;
+
+                /* Conversely, this indicates we haven't reached the desired ground/zoom level yet */
+                if (groundLevelToken != groundLevel || zoomLevelToken != zoomLevel) continue;
+                zoomLevelReached = true;
+
+                int x = int.Parse(tokens[4]);
+                int y = int.Parse(tokens[5]);
+
+                if (outFileName == null)
                 {
-                    Font = "Calibri",
-                    FontPointsize = 20,
-                    StrokeColor = MagickColors.Red,
-                    StrokeWidth = 1,
-                    FillColor = MagickColors.Red,
-                    TextGravity = Gravity.Northwest,
-                    BackgroundColor = MagickColors.Transparent,
-                    Height = 50,
-                    Width = 100
-                };
-                MagickImage coordinateText = new($"caption:[{x},{y}]", textSettings);
-                MagickImage flagText = new($"caption:0x{flag:X8}", textSettings);
-                grid.Composite(coordinateText, adjustedX + 10, adjustedY + 15, CompositeOperator.Over);
-                grid.Composite(flagText, adjustedX + 10, adjustedY + 40, CompositeOperator.Over);
-            }
-        }
+                    outFileName = string.Join(
+                        "_", tokens[0], tokens[1], groundLevelToken, zoomLevelToken, mask.ToString("X8"));
+                }
 
-        foreach (var flag in flags)
-            await WriteStitchedMap(grids[flag], outFileNames[flag]);
+                grid.BackgroundColor = MagickColors.Transparent;
+
+                await progressLabel.InvokeAsync(
+                    new Action(() => progressLabel.Text = $@"Stitching texture file {texFile.Name}..."));
+
+                MagickImage tile = new(texFile.Bytes);
+                tile.Resize(tileSize, tileSize);
+
+                int adjustedX = x * tileSize;
+                int adjustedY = grid.Height - y * tileSize - tileSize;
+
+                grid.Draw(new Drawables().Composite(adjustedX, adjustedY, tile));
+            }
+
+            if (outFileName == null) continue;
+            await progressLabel.InvokeAsync(new Action(() =>
+                progressLabel.Text = $@"Writing texture file {outFileName}..."));
+            await WriteStitchedMap(grid, outFileName);
+        }
+    }
+
+    private async Task WriteStitchedMap(IMagickImage grid, string path)
+    {
+        string outputFileName = $"{path}.dds";
+        string outputFilePath = $"{outputFolderPath}\\{outputFileName}";
+        await progressLabel.InvokeAsync(new Action(() => progressLabel.Text = $@"Writing {outputFileName} to file..."));
+        await Task.Delay(1000);
+        await grid.WriteAsync(outputFilePath);
     }
 
     private async Task RepackTileMap()
     {
-        // TODO: Function
-        List<string> groundLevels = GetGroundLevels();
-        List<string> zoomLevels = GetZoomLevels().Keys.ToList();
-        int groundLevelIndex = groundLevelComboBox.Invoke(() => groundLevelComboBox.SelectedIndex);
-        int zoomLevelIndex = zoomLevelComboBox.Invoke(() => zoomLevelComboBox.SelectedIndex);
-        groundLevels = GetFilteredGroundLevels(groundLevelIndex, groundLevels).ToList();
-        zoomLevels = GetFilteredZoomLevels(zoomLevelIndex, zoomLevels).ToList();
-        foreach (string groundLevel in groundLevels)
+        String info = "";
+        foreach (string inputFile in Directory.GetFiles(inputFolderPath, "*.dds"))
         {
-            foreach (string zoomLevel in zoomLevels)
-                await ExportTiles(groundLevel, zoomLevel);
+            string filename = Path.GetFileNameWithoutExtension(inputFile);
+            string[] tokens = filename.Split("_");
+            if (tokens.Length < 3) continue;
+            if ((savedMapImage = LoadMapImage(inputFile)) == null)
+            {
+                info += $"The image {filename} could not be read. \n";
+                continue;
+            }
+
+            string groundLevel = tokens[^3];
+            string zoomLevel = tokens[^2];
+            string mask = tokens[^1];
+            await ExportTiles(groundLevel, zoomLevel, mask);
         }
 
         mapTileBhd = new BXF4();
+        ShowInformationDialog("Export Complete.\n" + info);
     }
 
-    private async Task ExportTiles(string groundLevel, string zoomLevel)
+    private Task ExportTiles(string groundLevel, string zoomLevel, string mask)
     {
-        if (savedMapImage == null) return;
+        if (savedMapImage == null) return Task.CompletedTask;
         int gridSize = GetZoomLevels().GetValueOrDefault(zoomLevel);
         const int tileSize = 256;
-        // TODO: Cleanup
         using Bitmap mapImage = new(savedMapImage);
-        await ReadMapTileMaskRoot(groundLevel);
-        SetFlagsForExportTiles();
+        ReadMapTileMaskRoot(groundLevel);
         for (int x = 0; x < gridSize; x++)
         {
             for (int y = 0; y < gridSize; y++)
@@ -346,7 +369,7 @@ public partial class ERMapGenerator : MetroForm
                     Math.Min(tileSize, mapImage.Height - y * tileSize)
                 );
                 using Bitmap tileImage = new(tileSize, tileSize);
-                using (Graphics g = Graphics.FromImage(tileImage))
+                using (var g = Graphics.FromImage(tileImage))
                 {
                     g.Clear(Color.Transparent);
                     g.DrawImage(mapImage, new Rectangle(0, 0, tileSize, tileSize), tileRect, GraphicsUnit.Pixel);
@@ -354,30 +377,30 @@ public partial class ERMapGenerator : MetroForm
 
                 string tileXPos = x.ToString("D2");
                 string tileYPos = (gridSize - y - 1).ToString("D2");
-                string tileName = $"MENU_MapTile_{groundLevel}_{zoomLevel}_{tileXPos}_{tileYPos}";
-                string bitFlags = Flags[int.Parse(zoomLevel[1..]), x, gridSize - y - 1].ToString("X8");
-                if (bitFlags == "FFFFFFFF") continue;
-                string newTileName = $"{tileName}_{bitFlags}";
+                string newTileName = $"MENU_MapTile_{groundLevel}_{zoomLevel}_{tileXPos}_{tileYPos}_{mask:X8}";
                 WriteTile(tileImage, newTileName);
             }
         }
 
-        IEnumerable<int> files = mapTileBhd.Files.Select(file =>
+        var files = mapTileBhd.Files.Select(file =>
             mapTileTpfBhd.Files.FindIndex(i =>
-                string.Equals(i.Name, file.Name, StringComparison.OrdinalIgnoreCase)));
+                string.Equals(i.Name, file.Name, StringComparison.OrdinalIgnoreCase)
+            )
+        );
         foreach (int i in files.Where(index => index != -1)) mapTileTpfBhd.Files.RemoveAt(i);
         mapTileTpfBhd.Files.AddRange(mapTileBhd.Files);
         mapTileTpfBhd.Files = mapTileTpfBhd.Files.OrderBy(i => i.Name).ToList();
-        for (int i = 0; i < mapTileTpfBhd.Files.Count; i++)
-            mapTileTpfBhd.Files[i].ID = i;
+        for (int i = 0; i < mapTileTpfBhd.Files.Count; i++) mapTileTpfBhd.Files[i].ID = i;
         mapTileTpfBhd.Write(mapTileTpfBhdPath, mapTileTpfBtdPath);
+
+        return Task.CompletedTask;
     }
 
     private IEnumerable<string> GetFilteredGroundLevels(int groundLevelIndex, IReadOnlyList<string> groundLevels)
     {
         return automationModeTabControl.Invoke(() => automationModeTabControl.SelectedIndex == 0)
-            ? groundLevelIndex == 0 ? groundLevels.Skip(1) : new[] { groundLevels[groundLevelIndex] }
-            : new[] { groundLevels[groundLevelIndex] };
+            ? groundLevelIndex == 0 ? groundLevels.Skip(1) : [groundLevels[groundLevelIndex]]
+            : [groundLevels[groundLevelIndex]];
     }
 
     private IEnumerable<string> GetFilteredZoomLevels(int zoomLevelIndex, IReadOnlyList<string> zoomLevels)
@@ -397,7 +420,7 @@ public partial class ERMapGenerator : MetroForm
         texture.Bytes = ConvertMagickImageToDDS(image);
         texture.Name = tileName;
         texture.Format = 0x66;
-        TPF tpf = new() { Compression = DCX.Type.DCX_KRAK };
+        TPF tpf = new() { Compression = DCX.Type.DCX_DFLT_11000_44_9_15 };
         tpf.Textures.Add(texture);
         byte[] tpfBytes = tpf.Write();
         BinderFile file = new()
@@ -410,7 +433,7 @@ public partial class ERMapGenerator : MetroForm
 
     private void ToggleAllControls(bool wantsEnabled)
     {
-        RefreshMapImage();
+        // RefreshMapImage();
         mapConfigurationGroupBox.Enabled = wantsEnabled;
         automationModeTabControl.Enabled = wantsEnabled;
         automateButton.Enabled = wantsEnabled;
@@ -430,12 +453,12 @@ public partial class ERMapGenerator : MetroForm
 
     private void UpdateMapDisplayMinZoomLevel()
     {
-        mapDisplayPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-        Size clientSize = mapDisplayPictureBox.ClientSize;
-        Size imageSize = mapDisplayPictureBox.Image.Size;
-        mapDisplayMinZoomLevel = (float)clientSize.Width / imageSize.Width;
-        mapDisplayZoomLevel = mapDisplayMinZoomLevel;
-        mapDisplayPictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+        // mapDisplayPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+        // Size clientSize = mapDisplayPictureBox.ClientSize;
+        // Size imageSize = mapDisplayPictureBox.Image.Size;
+        // mapDisplayMinZoomLevel = (float)clientSize.Width / imageSize.Width;
+        // mapDisplayZoomLevel = mapDisplayMinZoomLevel;
+        // mapDisplayPictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
     }
 
     private List<string> GetGroundLevels()
@@ -457,7 +480,6 @@ public partial class ERMapGenerator : MetroForm
     {
         string previousSelectedItem = groundLevelComboBox.SelectedItem?.ToString() ?? "";
         mapConfigurationGroupBox.Enabled = true;
-        automateButton.Enabled = true;
         List<string> groundLevels = GetGroundLevels();
         groundLevelComboBox.Items.Clear();
         List<string> suffixes = new() { "", " (Overworld)", " (Underworld)", " (DLC)" };
@@ -508,17 +530,17 @@ public partial class ERMapGenerator : MetroForm
         zoomLevelComboBox.SelectedIndex = index != -1 ? index : 0;
     }
 
-    private void RefreshMapImage(bool resetPosition = false)
-    {
-        if (savedMapImage == null) return;
-        mapDisplayPictureBox.Image?.Dispose();
-        mapDisplayPictureBox.Image = new Bitmap(savedMapImage);
-        mapDisplayPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-        if (resetPosition) UpdateMapImagePosition(0, 0);
-        mapDisplayMinZoomLevel = -1;
-    }
+    // private void RefreshMapImage(bool resetPosition = false)
+    // {
+    // if (savedMapImage == null) return;
+    // mapDisplayPictureBox.Image?.Dispose();
+    // mapDisplayPictureBox.Image = new Bitmap(savedMapImage);
+    // mapDisplayPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+    // if (resetPosition) UpdateMapImagePosition(0, 0);
+    // mapDisplayMinZoomLevel = -1;
+    // }
 
-    private bool LoadMapImage(string path)
+    private Bitmap? LoadMapImage(string path)
     {
         Bitmap mapImage;
         try
@@ -527,133 +549,113 @@ public partial class ERMapGenerator : MetroForm
         }
         catch
         {
-            ShowInformationDialog("The map image could not be read.");
-            return false;
+            return null;
         }
 
-        savedMapImage = new Bitmap(mapImage);
-        RefreshMapImage(true);
-        return true;
+        return new Bitmap(mapImage);
     }
 
-    private void BrowseMapImageButton_Click(object sender, EventArgs e)
+    private void BrowseInputFolderButtonClick(object sender, EventArgs e)
     {
-        OpenFileDialog dialog = new()
-        {
-            Filter = @"DDS File (*.dds)|*.dds",
-            Title = @"Select Map DDS Image"
-        };
-        if (dialog.ShowDialog() != DialogResult.OK) return;
-        // TODO: Function
         string[] gameModFolderFiles = GetAllFolderFiles(gameModFolderPath);
         mapTileMaskBndPath = gameModFolderFiles.FirstOrDefault(i => i.Contains(".mtmskbnd.dcx")) ?? "";
+        mapTileTpfBhdPath = gameModFolderFiles.FirstOrDefault(i => i.Contains("71_maptile.tpfbhd")) ?? "";
+        mapTileTpfBtdPath = mapTileTpfBhdPath.Replace(".tpfbhd", ".tpfbdt");
         if (!ResourceExists(mapTileMaskBndPath, "71_maptile.mtmskbnd.dcx")) return;
+        if (!ResourceExists(mapTileTpfBhdPath, "71_maptile.tpfbhd")) return;
+        if (!ResourceExists(mapTileTpfBtdPath, "71_maptile.tpfbdt")) return;
         mapTileMaskBnd = BND4.Read(mapTileMaskBndPath);
-        if (!LoadMapImage(dialog.FileName)) return;
-        mapImageFilePath = dialog.FileName;
-        mapImageFilePathLabel.Text = mapImageFilePath;
-        mapDisplayOpenMapImageLabel.Visible = false;
-        mapDisplayGroupBox.Enabled = true;
-        PopulateGroundLevels();
-        PopulateZoomLevels();
+        mapTileTpfBhd = BXF4.Read(mapTileTpfBhdPath, mapTileTpfBtdPath);
 
-        // TODO: Cleanup
-        try
+        FolderBrowserDialog dialog = new()
         {
-            string mapImageFileName = Path.GetFileName(mapImageFilePath);
-            string[] tokens = mapImageFileName.Split('_');
-            groundLevelComboBox.SelectedItem =
-                groundLevelComboBox.Items.Cast<string>().FirstOrDefault(i => i.StartsWith(tokens[2]));
-            zoomLevelComboBox.SelectedItem =
-                zoomLevelComboBox.Items.Cast<string>().FirstOrDefault(i => i.StartsWith(tokens[3]));
-        }
-        catch
-        {
-        }
+            Description = @"Open Game/Mod Folder",
+            UseDescriptionForTitle = true
+        };
+        if (dialog.ShowDialog() != DialogResult.OK) return;
+        inputFolderPath = dialog.SelectedPath;
+        automateButton.Enabled = true;
+        inputFolderPathLabel.Text = inputFolderPath;
+
+        outputFolderGroupBox.Enabled = true;
+        InputFolderGroupBox.Enabled = true;
+
+        // mapDisplayOpenMapImageLabel.Visible = false;
+        // mapDisplayGroupBox.Enabled = true;
     }
 
-    private void MapDisplayPictureBox_MouseDown(object sender, MouseEventArgs e)
-    {
-        if (e.Button != MouseButtons.Left) return;
-        isDraggingMapDisplay = true;
-        mapDisplayXPos = e.X;
-        mapDisplayYPos = e.Y;
-    }
+    // private void MapDisplayPictureBox_MouseDown(object sender, MouseEventArgs e)
+    // {
+    // if (e.Button != MouseButtons.Left) return;
+    // isDraggingMapDisplay = true;
+    // mapDisplayXPos = e.X;
+    // mapDisplayYPos = e.Y;
+    // }
 
-    private void UpdateMapImagePosition(int x, int y)
-    {
-        int newTop = y + mapDisplayPictureBox.Top - mapDisplayYPos;
-        int newLeft = x + mapDisplayPictureBox.Left - mapDisplayXPos;
-        int imageTop = newTop + mapDisplayPictureBox.Height;
-        int imageLeft = newLeft + mapDisplayPictureBox.Width;
-        if (imageTop > mapDisplayPictureBox.Height)
-            newTop = 0;
-        if (imageLeft > mapDisplayPictureBox.Width)
-            newLeft = 0;
-        if (newTop < mapDisplayPictureBox.Parent!.ClientSize.Height - mapDisplayPictureBox.Height)
-            newTop = mapDisplayPictureBox.Parent.ClientSize.Height - mapDisplayPictureBox.Height;
-        if (newLeft < mapDisplayPictureBox.Parent.ClientSize.Width - mapDisplayPictureBox.Width)
-            newLeft = mapDisplayPictureBox.Parent.ClientSize.Width - mapDisplayPictureBox.Width;
-        mapDisplayPictureBox.Top = newTop;
-        mapDisplayPictureBox.Left = newLeft;
-    }
+    // private void UpdateMapImagePosition(int x, int y)
+    // {
+    // int newTop = y + mapDisplayPictureBox.Top - mapDisplayYPos;
+    // int newLeft = x + mapDisplayPictureBox.Left - mapDisplayXPos;
+    // int imageTop = newTop + mapDisplayPictureBox.Height;
+    // int imageLeft = newLeft + mapDisplayPictureBox.Width;
+    // if (imageTop > mapDisplayPictureBox.Height)
+    //     newTop = 0;
+    // if (imageLeft > mapDisplayPictureBox.Width)
+    //     newLeft = 0;
+    // if (newTop < mapDisplayPictureBox.Parent!.ClientSize.Height - mapDisplayPictureBox.Height)
+    //     newTop = mapDisplayPictureBox.Parent.ClientSize.Height - mapDisplayPictureBox.Height;
+    // if (newLeft < mapDisplayPictureBox.Parent.ClientSize.Width - mapDisplayPictureBox.Width)
+    //     newLeft = mapDisplayPictureBox.Parent.ClientSize.Width - mapDisplayPictureBox.Width;
+    // mapDisplayPictureBox.Top = newTop;
+    // mapDisplayPictureBox.Left = newLeft;
+    // }
 
-    private void MapDisplayPictureBox_MouseMove(object sender, MouseEventArgs e)
-    {
-        if (!isDraggingMapDisplay) return;
-        UpdateMapImagePosition(e.X, e.Y);
-    }
+    // private void MapDisplayPictureBox_MouseMove(object sender, MouseEventArgs e)
+    // {
+    // if (!isDraggingMapDisplay) return;
+    // UpdateMapImagePosition(e.X, e.Y);
+    // }
 
-    private void MapDisplayPictureBox_MouseUp(object sender, MouseEventArgs e)
-    {
-        isDraggingMapDisplay = false;
-    }
-
-    private void ERMapGenerator_Shown(object sender, EventArgs e)
-    {
-        mapDisplayGroupBox.Enabled = false;
-        mapConfigurationGroupBox.Enabled = false;
-        outputFolderGroupBox.Enabled = false;
-        drawTileDebugInfoCheckBox.Enabled = false;
-        automateButton.Enabled = false;
-        mapImageGroupBox.Enabled = false;
-    }
+    // private void MapDisplayPictureBox_MouseUp(object sender, MouseEventArgs e)
+    // {
+    // isDraggingMapDisplay = false;
+    // }
 
     private void MapDisplayPictureBox_MouseWheel(object? sender, MouseEventArgs e)
     {
-        if (mapDisplayMinZoomLevel < 0) UpdateMapDisplayMinZoomLevel();
-        int oldWidth = mapDisplayPictureBox.Image.Width;
-        int oldHeight = mapDisplayPictureBox.Image.Height;
-        int oldX = mapDisplayPictureBox.Left;
-        int oldY = mapDisplayPictureBox.Top;
-        mapDisplayZoomLevel = e.Delta > 0
-            ? Math.Min(mapDisplayZoomLevel * (1 + mapDisplayZoomIncrement), mapDisplayMaxZoomLevel)
-            : Math.Max(mapDisplayZoomLevel * (1 - mapDisplayZoomIncrement), mapDisplayMinZoomLevel);
-        Bitmap mapImage = new(savedMapImage,
-            new Size((int)(savedMapImage.Width * mapDisplayZoomLevel),
-                (int)(savedMapImage.Height * mapDisplayZoomLevel)));
-        mapDisplayPictureBox.Image?.Dispose();
-        mapDisplayPictureBox.Image = mapImage;
-        float mouseX = e.X;
-        float mouseY = e.Y;
-        float scaleFactorX = (float)mapImage.Width / oldWidth;
-        float scaleFactorY = (float)mapImage.Height / oldHeight;
-        int newLeft = (int)(oldX - mouseX * (scaleFactorX - 1));
-        int newTop = (int)(oldY - mouseY * (scaleFactorY - 1));
-        mapDisplayPictureBox.Left = newLeft;
-        mapDisplayPictureBox.Top = newTop;
-        int imageTop = newTop + mapDisplayPictureBox.Height;
-        int imageLeft = newLeft + mapDisplayPictureBox.Width;
-        if (imageTop > mapDisplayPictureBox.Height)
-            newTop = 0;
-        if (imageLeft > mapDisplayPictureBox.Width)
-            newLeft = 0;
-        if (newTop < mapDisplayPictureBox.Parent!.ClientSize.Height - mapDisplayPictureBox.Height)
-            newTop = mapDisplayPictureBox.Parent.ClientSize.Height - mapDisplayPictureBox.Height;
-        if (newLeft < mapDisplayPictureBox.Parent.ClientSize.Width - mapDisplayPictureBox.Width)
-            newLeft = mapDisplayPictureBox.Parent.ClientSize.Width - mapDisplayPictureBox.Width;
-        mapDisplayPictureBox.Top = newTop;
-        mapDisplayPictureBox.Left = newLeft;
+        // if (mapDisplayMinZoomLevel < 0) UpdateMapDisplayMinZoomLevel();
+        // int oldWidth = mapDisplayPictureBox.Image.Width;
+        // int oldHeight = mapDisplayPictureBox.Image.Height;
+        // int oldX = mapDisplayPictureBox.Left;
+        // int oldY = mapDisplayPictureBox.Top;
+        // mapDisplayZoomLevel = e.Delta > 0
+        //     ? Math.Min(mapDisplayZoomLevel * (1 + mapDisplayZoomIncrement), mapDisplayMaxZoomLevel)
+        //     : Math.Max(mapDisplayZoomLevel * (1 - mapDisplayZoomIncrement), mapDisplayMinZoomLevel);
+        // Bitmap mapImage = new(savedMapImage,
+        //     new Size((int)(savedMapImage.Width * mapDisplayZoomLevel),
+        //         (int)(savedMapImage.Height * mapDisplayZoomLevel)));
+        // mapDisplayPictureBox.Image?.Dispose();
+        // mapDisplayPictureBox.Image = mapImage;
+        // float mouseX = e.X;
+        // float mouseY = e.Y;
+        // float scaleFactorX = (float)mapImage.Width / oldWidth;
+        // float scaleFactorY = (float)mapImage.Height / oldHeight;
+        // int newLeft = (int)(oldX - mouseX * (scaleFactorX - 1));
+        // int newTop = (int)(oldY - mouseY * (scaleFactorY - 1));
+        // mapDisplayPictureBox.Left = newLeft;
+        // mapDisplayPictureBox.Top = newTop;
+        // int imageTop = newTop + mapDisplayPictureBox.Height;
+        // int imageLeft = newLeft + mapDisplayPictureBox.Width;
+        // if (imageTop > mapDisplayPictureBox.Height)
+        //     newTop = 0;
+        // if (imageLeft > mapDisplayPictureBox.Width)
+        //     newLeft = 0;
+        // if (newTop < mapDisplayPictureBox.Parent!.ClientSize.Height - mapDisplayPictureBox.Height)
+        //     newTop = mapDisplayPictureBox.Parent.ClientSize.Height - mapDisplayPictureBox.Height;
+        // if (newLeft < mapDisplayPictureBox.Parent.ClientSize.Width - mapDisplayPictureBox.Width)
+        //     newLeft = mapDisplayPictureBox.Parent.ClientSize.Width - mapDisplayPictureBox.Width;
+        // mapDisplayPictureBox.Top = newTop;
+        // mapDisplayPictureBox.Left = newLeft;
     }
 
     private static byte[] ConvertMagickImageToDDS(IMagickImage image)
@@ -669,7 +671,7 @@ public partial class ERMapGenerator : MetroForm
 
     private void AutomationModeTabControl_SelectedIndexChanged(object sender, EventArgs e)
     {
-        RefreshMapImage();
+        // RefreshMapImage();
         if (groundLevelComboBox.Items.Count <= 0 || zoomLevelComboBox.Items.Count <= 0) return;
         PopulateGroundLevels();
         PopulateZoomLevels();
@@ -677,14 +679,14 @@ public partial class ERMapGenerator : MetroForm
 
     private class Matrix
     {
-        private readonly Dictionary<string, int> Data = new();
+        private readonly Dictionary<string, bool> Data = new();
 
-        public int this[int zoomLevel, int x, int y]
+        public bool this[int zoomLevel, int x, int y]
         {
             get
             {
                 string key = GetKey(zoomLevel, x, y);
-                return Data.ContainsKey(key) ? Data[key] : -1;
+                return Data.ContainsKey(key) ? Data[key] : false;
             }
             set
             {
@@ -695,15 +697,7 @@ public partial class ERMapGenerator : MetroForm
 
         private static string GetKey(int zoomLevel, int x, int y)
         {
-            return string.Join(",", new[] { zoomLevel, x, y });
+            return string.Join(",", [zoomLevel, x, y]);
         }
-    }
-
-    private void groundLevelComboBox_SelectedIndexChanged(object sender, EventArgs e)
-    {
-    }
-
-    private void tabPage2_Click(object sender, EventArgs e)
-    {
     }
 }

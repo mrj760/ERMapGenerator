@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6vh750lsHaw=",
+  "dgSpecHash": "SfRpXlgKwOg=",
   "success": true,
-  "projectFilePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+  "projectFilePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TakeA\\.nuget\\packages\\magick.net-q16-anycpu\\13.1.3\\magick.net-q16-anycpu.13.1.3.nupkg.sha512",
     "C:\\Users\\TakeA\\.nuget\\packages\\magick.net.core\\13.1.3\\magick.net.core.13.1.3.nupkg.sha512",
@@ -19,9 +19,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-6hgw-6x87-578x",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -31,9 +31,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-9ccg-6pjw-x645",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -43,9 +43,9 @@
       "code": "NU1902",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-9pp9-cfwx-54rm",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -55,9 +55,9 @@
       "code": "NU1901",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known low severity vulnerability, https://github.com/advisories/GHSA-cfh4-9f7v-fhrc",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -67,9 +67,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-cjc8-g9w8-chfw",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -79,9 +79,9 @@
       "code": "NU1901",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known low severity vulnerability, https://github.com/advisories/GHSA-fff3-4rp7-px97",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -91,9 +91,9 @@
       "code": "NU1901",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known low severity vulnerability, https://github.com/advisories/GHSA-fh55-q5pj-pxgw",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -103,9 +103,9 @@
       "code": "NU1901",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known low severity vulnerability, https://github.com/advisories/GHSA-hm4x-r5hc-794f",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -115,9 +115,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-j7hp-h8jx-5ppr",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -127,9 +127,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-mxvv-97wh-cfmm",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -139,9 +139,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-qh3h-j545-h8c9",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -151,9 +151,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-qp29-wxp5-wh82",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -163,9 +163,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Magick.NET-Q16-AnyCPU' 13.1.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-vmhh-8rxq-fp9g",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "Magick.NET-Q16-AnyCPU",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -175,9 +175,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'MetroFramework.Design 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "MetroFramework.Design",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -187,9 +187,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'MetroFramework.Fonts 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "MetroFramework.Fonts",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -199,9 +199,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Package 'MetroFramework.RunTime 1.2.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "warningLevel": 1,
-      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "filePath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "libraryId": "MetroFramework.RunTime",
       "targetGraphs": [
         "net9.0-windows7.0"

@@ -338,11 +338,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectUniqueName": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "projectName": "ERMapGenerator",
-      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\ERMapGenerator.csproj",
+      "projectPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\ERMapGenerator.csproj",
       "packagesPath": "C:\\Users\\TakeA\\.nuget\\packages\\",
-      "outputPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\Map Generator - mj\\obj\\",
+      "outputPath": "O:\\SteamLibrary\\steamapps\\common\\ELDEN RING\\.tools\\ERMapGenerator-MJ\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Program Files\\Visual Studio\\Shared\\NuGetPackages"
